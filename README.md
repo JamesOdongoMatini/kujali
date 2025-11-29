@@ -20,6 +20,28 @@ This PR adds a new backend feature to the Kujali application using the CQRS patt
 - Command-handler pattern allows for clear separation of concerns.
 - Promotes testability and maintainability.
 - Provides a structured way to extend additional budget operations in the future.
+# Feature: Add Note to Budget Command
+
+## Overview
+This PR adds a new backend feature to the Kujali application using the CQRS pattern. It introduces a command (`AddNoteToBudgetCommand`) and its handler (`AddNoteToBudgetHandler`) to support adding notes to budgets.
+
+## Design Choices
+- **Command** encapsulates all necessary data to add a note to a budget.
+- **Handler** validates the command, then calls the repository to persist the data.
+- Follows CQRS pattern: separation of command (write) logic from query (read) logic.
+
+## Dependencies
+- Uses the repository obtained via the handler’s toolkit (`getRepository`) to interact with Firestore/Postgres.
+
+## Serverless Deployment Considerations
+- Handler can be deployed as a serverless function using the existing @ngfire/functions setup.
+- Each invocation is stateless, and scaling is automatic, supporting multiple concurrent budget notes submissions.
+- Serverless model reduces operational overhead and provides automatic scaling.
+
+## Backend Development Understanding
+- Command-handler pattern allows for clear separation of concerns.
+- Promotes testability and maintainability.
+- Provides a structured way to extend additional budget operations in the future.
 
 
 
